@@ -39,6 +39,11 @@ namespace Phones.Host.Conrollers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             await _brandService.Delete(id);
             return NoContent();
         }
